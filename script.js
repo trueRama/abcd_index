@@ -5,6 +5,12 @@ class ContentManager {
         this.init();
     }
 
+    escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
+
     init() {
         this.setupEventListeners();
         this.renderContentList();
@@ -128,17 +134,17 @@ class ContentManager {
 
     createContentCard(content) {
         const date = new Date(content.createdAt).toLocaleDateString();
-        const tagsHtml = content.tags.map(tag => `<span class="tag">${tag}</span>`).join('');
+        const tagsHtml = content.tags.map(tag => `<span class="tag">${this.escapeHtml(tag)}</span>`).join('');
         
         return `
             <div class="content-item">
-                <h3>${content.title}</h3>
+                <h3>${this.escapeHtml(content.title)}</h3>
                 <div class="content-meta">
                     <span class="badge ${content.category}">${content.category.toUpperCase()}</span>
-                    <span>By ${content.author}</span> • 
+                    <span>By ${this.escapeHtml(content.author)}</span> • 
                     <span>${date}</span>
                 </div>
-                <p>${content.body.substring(0, 150)}${content.body.length > 150 ? '...' : ''}</p>
+                <p>${this.escapeHtml(content.body.substring(0, 150))}${content.body.length > 150 ? '...' : ''}</p>
                 ${content.tags.length > 0 ? `<div class="tags">${tagsHtml}</div>` : ''}
                 <div class="item-actions">
                     <button class="btn btn-secondary" id="view-${content.id}">View Full</button>
@@ -160,7 +166,13 @@ class ContentManager {
         document.getElementById('previewBody').textContent = content.body;
         
         const tagsContainer = document.getElementById('previewTags');
-        tagsContainer.innerHTML = content.tags.map(tag => `<span class="tag">${tag}</span>`).join('');
+        tagsContainer.innerHTML = '';
+        content.tags.forEach(tag => {
+            const tagEl = document.createElement('span');
+            tagEl.className = 'tag';
+            tagEl.textContent = tag;
+            tagsContainer.appendChild(tagEl);
+        });
 
         const modal = document.getElementById('previewModal');
         modal.style.display = 'block';
