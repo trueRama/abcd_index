@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abcd Portal.live - Content Creation</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Abcd Portal.live</h1>
+            <p class="subtitle">Content Creation Platform</p>
+        </header>
+
+        <main>
+            <div class="content-creator">
+                <h2>Create New Content</h2>
+                <form id="contentForm">
+                    <div class="form-group">
+                        <label for="contentTitle">Title</label>
+                        <input type="text" id="contentTitle" name="title" placeholder="Enter content title" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="contentCategory">Category</label>
+                        <select id="contentCategory" name="category" required>
+                            <option value="">Select a category</option>
+                            <option value="article">Article</option>
+                            <option value="blog">Blog Post</option>
+                            <option value="news">News</option>
+                            <option value="tutorial">Tutorial</option>
+                            <option value="announcement">Announcement</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="contentAuthor">Author</label>
+                        <input type="text" id="contentAuthor" name="author" placeholder="Enter author name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="contentBody">Content Body</label>
+                        <textarea id="contentBody" name="body" rows="10" placeholder="Write your content here..." required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="contentTags">Tags (comma-separated)</label>
+                        <input type="text" id="contentTags" name="tags" placeholder="e.g., technology, tutorial, guide">
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Create Content</button>
+                        <button type="button" class="btn btn-secondary" id="previewBtn">Preview</button>
+                        <button type="reset" class="btn btn-default">Clear</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="content-list">
+                <h2>Created Content</h2>
+                <div class="list-actions">
+                    <button class="btn btn-secondary" id="exportBtn">Export All</button>
+                    <button class="btn btn-default" id="clearAllBtn">Clear All</button>
+                </div>
+                <div id="contentItems" class="content-items">
+                    <p class="empty-state">No content created yet. Start by creating your first content above!</p>
+                </div>
+            </div>
+        </main>
+
+        <!-- Preview Modal -->
+        <div id="previewModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Content Preview</h2>
+                <div id="previewContent">
+                    <h3 id="previewTitle"></h3>
+                    <div class="preview-meta">
+                        <span id="previewCategory" class="badge"></span>
+                        <span id="previewAuthor"></span>
+                        <span id="previewDate"></span>
+                    </div>
+                    <div id="previewBody"></div>
+                    <div id="previewTags" class="tags"></div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>&copy; 2025 Abcd Portal.live - Content Creation Platform</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
